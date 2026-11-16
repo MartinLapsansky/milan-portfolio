@@ -1,26 +1,193 @@
 @import "tailwindcss";
+@import "./tokens.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
+/* ----------------------------------------------------------------------------
+   Map the semantic token layer into Tailwind so utilities such as
+   `bg-primary`, `text-text`, `border-border`, `rounded-lg`, `shadow-brand`
+   resolve to design tokens. `inline` keeps the utilities pointing at the live
+   CSS variables, so light/dark theme swaps keep working without component
+   changes. Components never reference raw palette values.
+---------------------------------------------------------------------------- */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Backgrounds */
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-sunken: var(--color-surface-sunken);
+  --color-brand-subtle: var(--color-brand-subtle);
+  --color-overlay: var(--color-overlay);
+
+  /* Text */
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-subtle: var(--color-text-subtle);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-text-brand: var(--color-text-brand);
+
+  /* Borders / dividers */
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+  --color-divider: var(--color-divider);
+
+  /* Brand / actions */
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-active: var(--color-primary-active);
+  --color-on-primary: var(--color-on-primary);
+  --color-primary-subtle: var(--color-primary-subtle);
+  --color-primary-subtle-border: var(--color-primary-subtle-border);
+
+  /* Focus / links */
+  --color-focus-ring: var(--color-focus-ring);
+  --color-link: var(--color-link);
+  --color-link-hover: var(--color-link-hover);
+
+  /* Status */
+  --color-success: var(--color-success);
+  --color-success-subtle: var(--color-success-subtle);
+  --color-success-strong: var(--color-success-strong);
+  --color-warning: var(--color-warning);
+  --color-warning-subtle: var(--color-warning-subtle);
+  --color-warning-strong: var(--color-warning-strong);
+  --color-danger: var(--color-danger);
+  --color-danger-subtle: var(--color-danger-subtle);
+  --color-danger-strong: var(--color-danger-strong);
+  --color-info: var(--color-info);
+  --color-info-subtle: var(--color-info-subtle);
+  --color-info-strong: var(--color-info-strong);
+
+  /* Radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-full: var(--radius-full);
+
+  /* Shadow */
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-brand: var(--shadow-brand);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ----------------------------------------------------------------------------
+   Base document
+---------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  /* Keep anchored sections clear of the sticky header. */
+  scroll-padding-top: 6rem;
+  background: var(--color-bg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ----------------------------------------------------------------------------
+   Entrance animations — content rises into place, imagery fades in.
+   Longhand properties (no `animation` shorthand) so per-element
+   `[animation-delay:*]` utilities can stagger the sequence.
+---------------------------------------------------------------------------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-rise {
+  animation-name: rise;
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+
+.animate-fade-in {
+  animation-name: fade-in;
+  animation-duration: 0.9s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+/* Decorative arrow drift — slides along its own diagonal (up-right, toward
+   the top-right corner) and returns, translating only so the arrow's
+   orientation is preserved. The travel/duration are design tokens declared
+   in `app/tokens.css` (`--arrow-drift-*`). */
+@keyframes drift-arrow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(var(--arrow-drift-x), var(--arrow-drift-y), 0);
+  }
+}
+
+.animate-drift-arrow {
+  animation-name: drift-arrow;
+  animation-duration: var(--arrow-drift-duration);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* ----------------------------------------------------------------------------
+   Horizontal carousel — hide the native scrollbar while keeping the element
+   swipeable and scrollable by keyboard / trackpad.
+---------------------------------------------------------------------------- */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE / legacy Edge */
+  scrollbar-width: none; /* Firefox, Chrome 121+ */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.no-scrollbar::-webkit-scrollbar-track,
+.no-scrollbar::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+/* Progressive enhancement: when JavaScript is unavailable, reveal-on-view
+   content (`.reveal`) stays visible instead of remaining at opacity 0. */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1 !important;
+  }
+}
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

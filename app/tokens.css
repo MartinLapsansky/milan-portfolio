@@ -1,0 +1,198 @@
+/* ============================================================================
+   PORTFOLIO DESIGN SYSTEM — Tokens
+   Base brand: #0630A8  (hue 224)
+   Drop this file into app/globals.css (import it first) or use Tailwind theme.
+
+   Naming:  --brand-*      raw palette (never used directly in components)
+            --color-*      semantic layer (USE THESE ONLY in components)
+   ========================================================================== */
+
+:root {
+    /* ------------------------------------------------------------------
+       1. RAW PALETTE — brand blue ramp built from #0630A8 (700 = your base)
+          Contrast vs #FFFFFF is noted for text use.
+    ------------------------------------------------------------------ */
+    --brand-50:   #F2F5FE;   /* 1.09 — tinted section bg            */
+    --brand-100:  #E3EAFC;   /* 1.20 — hover on ghost buttons       */
+    --brand-200:  #C8D4F8;   /* 1.48 — subtle borders, badges bg    */
+    --brand-300:  #9EB3F0;   /* 2.07 — dark-mode accent text        */
+    --brand-400:  #547BEB;   /* 3.88 — focus ring on white          */
+    --brand-500:  #164EED;   /* 6.27 — hover state of primary btn   */
+    --brand-600:  #0E3EC5;   /* 8.35 — pressed state                */
+    --brand-700:  #0630A8;   /* 10.52 — YOUR BASE. primary button   */
+    --brand-800:  #0B2A82;   /* 12.59 — hero gradient end           */
+    --brand-900:  #0A2162;   /* 14.93 — headings on light           */
+    --brand-950:  #081744;   /* 17.26 — dark hero bg                */
+
+    /* Neutrals — tinted to hue 224 so they never look "dirty grey" next to blue */
+    --neutral-0:   #FFFFFF;
+    --neutral-50:  #F8F9FB;
+    --neutral-100: #F2F3F7;
+    --neutral-200: #E4E6EC;
+    --neutral-300: #D4D7E0;
+    --neutral-400: #A9AEBC;
+    --neutral-500: #858CA1;
+    --neutral-600: #687187;
+    --neutral-700: #545C70;
+    --neutral-800: #3F4555;
+    --neutral-900: #2C313F;
+    --neutral-950: #1F232E;
+
+    /* Dark-mode surfaces (slightly blue, never pure black) */
+    --dark-bg:    #0B1220;
+    --dark-card:  #131A2A;
+    --dark-line:  #232C40;
+
+    /* Semantic states */
+    --success-50: #ECFDF3; --success-500: #12B76A; --success-700: #027A48;
+    --warning-50: #FFFAEB; --warning-500: #F79009; --warning-700: #B54708;
+    --danger-50:  #FEF3F2; --danger-500:  #F04438; --danger-700:  #B42318;
+    --info-50:    #EFF8FF; --info-500:    #2E90FA; --info-700:    #175CD3;
+
+    /* ------------------------------------------------------------------
+       2. SEMANTIC LAYER — LIGHT THEME (default)
+          Components only reference these. Swapping theme = swapping this block.
+    ------------------------------------------------------------------ */
+    --color-bg:            var(--neutral-50);    /* page background          */
+    --color-surface:       var(--neutral-0);     /* cards, header, modals    */
+    --color-surface-sunken: var(--neutral-100);  /* wells, code blocks       */
+    --color-brand-subtle:  var(--brand-50);      /* tinted section           */
+    --color-overlay:       rgba(16, 24, 40, .55); /* modal scrim              */
+
+    --color-text:          var(--neutral-900);   /* body copy — 12.98:1      */
+    --color-text-muted:    var(--neutral-600);   /* secondary — 4.88:1  AA   */
+    --color-text-subtle:   var(--neutral-500);   /* meta only — 3.35:1, LG text or non-essential */
+    --color-text-inverse:  var(--neutral-0);
+    --color-text-brand:    var(--brand-700);
+
+    --color-border:        var(--neutral-200);
+    --color-border-strong: var(--neutral-300);
+    --color-divider:       var(--neutral-200);
+
+    --color-primary:          var(--brand-700);
+    --color-primary-hover:    var(--brand-500);
+    --color-primary-active:   var(--brand-600);
+    --color-on-primary:       #FFFFFF;
+    --color-primary-subtle:   var(--brand-50);
+    --color-primary-subtle-border: var(--brand-200);
+
+    --color-focus-ring:    var(--brand-400);
+    --color-link:          var(--brand-700);
+    --color-link-hover:    var(--brand-500);
+
+    /* Status — online indicator (avatar dot), badges, form errors.
+       `*` = icon/dot fill, `-subtle` = tinted background, `-strong` = text. */
+    --color-success:          var(--success-500);
+    --color-success-subtle:   var(--success-50);
+    --color-success-strong:   var(--success-700);
+    --color-warning:          var(--warning-500);
+    --color-warning-subtle:   var(--warning-50);
+    --color-warning-strong:   var(--warning-700);
+    --color-danger:           var(--danger-500);
+    --color-danger-subtle:    var(--danger-50);
+    --color-danger-strong:    var(--danger-700);
+    --color-info:             var(--info-500);
+    --color-info-subtle:      var(--info-50);
+    --color-info-strong:      var(--info-700);
+
+    /* ------------------------------------------------------------------
+       3. RADIUS / SPACE / SHADOW — derived from brand hue for cohesion
+    ------------------------------------------------------------------ */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 999px;
+
+    --shadow-xs: 0 1px 2px rgba(16, 24, 40, .05);
+    --shadow-sm: 0 1px 3px rgba(16, 24, 40, .08), 0 1px 2px rgba(16, 24, 40, .04);
+    --shadow-md: 0 4px 12px rgba(16, 24, 40, .08), 0 2px 4px rgba(16, 24, 40, .04);
+    --shadow-lg: 0 12px 32px rgba(16, 24, 40, .10), 0 4px 8px rgba(16, 24, 40, .04);
+    --shadow-brand: 0 8px 24px rgba(6, 48, 168, .24);  /* glows from YOUR blue */
+
+    --gradient-brand: linear-gradient(135deg, var(--brand-700) 0%, var(--brand-900) 100%);
+    --gradient-hero:  linear-gradient(180deg, var(--brand-50) 0%, var(--neutral-50) 100%);
+
+    /* ------------------------------------------------------------------
+       4. TYPOGRAPHY
+    ------------------------------------------------------------------ */
+    /* Single family for the whole interface: Archivo (variable 100–900,
+       latin + latin-ext, so Slovak diacritics render natively). */
+    --font-sans: var(--font-archivo), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+    --text-xs:   .75rem;   /* 12 */
+    --text-sm:   .875rem;  /* 14 */
+    --text-base: 1rem;     /* 16 */
+    --text-lg:   1.125rem; /* 18 */
+    --text-xl:   1.25rem;  /* 20 */
+    --text-2xl:  1.5rem;   /* 24 */
+    --text-3xl:  1.875rem; /* 30 */
+    --text-4xl:  2.25rem;  /* 36 */
+    --text-5xl:  3rem;     /* 48 */
+    --text-6xl:  3.75rem;  /* 60 */
+
+    /* ------------------------------------------------------------------
+       5. MOTION — decorative animation tunables
+          Hero arrow drifts along its own diagonal, so keep |x| === |y|
+          to preserve the true 45° path toward the top-right corner.
+    ------------------------------------------------------------------ */
+    --arrow-drift-x: 0.5rem;          /* horizontal travel (positive = right) */
+    --arrow-drift-y: -0.5rem;         /* vertical travel (negative = up)      */
+    --arrow-drift-duration: 5.5s;   /* one full drift-and-return loop       */
+}
+
+/* --------------------------------------------------------------------
+   DARK THEME
+   Enable with <html class="dark"> (Tailwind) or data-theme="dark".
+   Only the semantic layer changes. Zero component rewrites.
+-------------------------------------------------------------------- */
+.dark,
+[data-theme="dark"] {
+    --color-bg:            var(--dark-bg);
+    --color-surface:       var(--dark-card);
+    --color-surface-sunken: #0F1626;
+    --color-brand-subtle:  rgba(84, 123, 235, .10);
+    --color-overlay:       rgba(0, 0, 0, .70);
+
+    --color-text:          #F2F4F8;              /* 16.4:1 on #0B1220 */
+    --color-text-muted:    var(--neutral-400);   /* 8.44:1             */
+    --color-text-subtle:   var(--neutral-500);   /* 5.58:1             */
+    --color-text-inverse:  var(--dark-bg);
+    --color-text-brand:    var(--brand-300);     /* 9.06:1 on dark     */
+
+    --color-border:        var(--dark-line);
+    --color-border-strong: #313D57;
+    --color-divider:       var(--dark-line);
+
+    /* Brand must get LIGHTER on dark to stay legible */
+    --color-primary:        var(--brand-300);
+    --color-primary-hover:  var(--brand-200);
+    --color-primary-active: var(--brand-400);
+    --color-on-primary:     var(--brand-950);
+    --color-primary-subtle: rgba(84, 123, 235, .14);
+    --color-primary-subtle-border: rgba(84, 123, 235, .32);
+
+    --color-focus-ring:  var(--brand-300);
+    --color-link:        var(--brand-300);
+    --color-link-hover:  var(--brand-200);
+
+    --color-success:          var(--success-500);
+    --color-success-subtle:   rgba(18, 183, 106, .14);
+    --color-success-strong:   var(--success-500);
+    --color-warning:          var(--warning-500);
+    --color-warning-subtle:   rgba(247, 144, 9, .14);
+    --color-warning-strong:   var(--warning-500);
+    --color-danger:           var(--danger-500);
+    --color-danger-subtle:    rgba(240, 68, 56, .14);
+    --color-danger-strong:    var(--danger-500);
+    --color-info:             var(--info-500);
+    --color-info-subtle:      rgba(46, 144, 250, .14);
+    --color-info-strong:      var(--info-500);
+
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, .40);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, .50);
+    --shadow-brand: 0 8px 24px rgba(84, 123, 235, .28);
+
+    --gradient-hero: linear-gradient(180deg, #080D18 0%, var(--dark-bg) 100%);
+}
