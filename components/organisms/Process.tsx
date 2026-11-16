@@ -9,6 +9,7 @@ import {
   faRocket,
 } from "@fortawesome/free-solid-svg-icons";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import useInView from "@/hooks/useInView";
 
 interface ProcessStage {
   name: string;
@@ -33,36 +34,15 @@ const STEP_DELAY_CLASSES = [
 const REVEAL_HIDDEN = "reveal opacity-0 motion-reduce:opacity-100";
 
 export default function Process() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [inView, setInView] = useState(false);
+  const { ref, inView } = useInView<HTMLElement>();
+
+
 
   /* Reveal the section the first time it enters the viewport. */
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    if (typeof IntersectionObserver === "undefined") {
-      const fallback = window.setTimeout(() => setInView(true), 0);
-      return () => window.clearTimeout(fallback);
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <section
-      ref={sectionRef}
+      ref={ref}
       id="priebeh-spoluprace"
       aria-labelledby="priebeh-spoluprace-heading"
       className="w-full"

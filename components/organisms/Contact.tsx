@@ -8,7 +8,7 @@ import FormField from "@/components/molecules/FormField";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-type FieldName = "meno" | "priezvisko" | "email";
+type FieldName = "name" | "lastname" | "email";
 type FieldErrors = Partial<Record<FieldName, string>>;
 
 export default function Contact() {
@@ -20,13 +20,13 @@ export default function Contact() {
     const form = event.currentTarget;
     const data = new FormData(form);
 
-    const meno = String(data.get("meno") ?? "").trim();
-    const priezvisko = String(data.get("priezvisko") ?? "").trim();
+    const name = String(data.get("name") ?? "").trim();
+    const lastname = String(data.get("lastname ") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
 
     const nextErrors: FieldErrors = {};
-    if (!meno) nextErrors.meno = "Vyplňte prosím meno.";
-    if (!priezvisko) nextErrors.priezvisko = "Vyplňte prosím priezvisko.";
+    if (!name) nextErrors.name = "Vyplňte prosím name.";
+    if (!lastname) nextErrors.lastname = "Vyplňte prosím lastname .";
     if (!email) {
       nextErrors.email = "Vyplňte prosím e-mail.";
     } else if (!EMAIL_REGEX.test(email)) {
@@ -72,31 +72,31 @@ export default function Contact() {
           className="mt-10 flex flex-col gap-5"
         >
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <FormField id="meno" label="Meno" required error={errors.meno}>
+            <FormField id="name" label="name" required error={errors.name}>
               <Input
-                id="meno"
-                name="meno"
+                id="name"
+                name="name"
                 autoComplete="given-name"
                 placeholder="Ján"
-                invalid={Boolean(errors.meno)}
-                aria-describedby={errors.meno ? "meno-error" : undefined}
+                invalid={Boolean(errors.name)}
+                aria-describedby={errors.name ? "name-error" : undefined}
               />
             </FormField>
 
             <FormField
-              id="priezvisko"
-              label="Priezvisko"
+              id="lastname "
+              label="lastname "
               required
-              error={errors.priezvisko}
+              error={errors.lastname }
             >
               <Input
-                id="priezvisko"
-                name="priezvisko"
+                id="lastname "
+                name="lastname "
                 autoComplete="family-name"
                 placeholder="Novák"
-                invalid={Boolean(errors.priezvisko)}
+                invalid={Boolean(errors.lastname )}
                 aria-describedby={
-                  errors.priezvisko ? "priezvisko-error" : undefined
+                  errors.lastname  ? "lastname -error" : undefined
                 }
               />
             </FormField>
