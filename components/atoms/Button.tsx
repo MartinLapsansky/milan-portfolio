@@ -16,6 +16,7 @@ interface ButtonProps {
   external?: boolean;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
+  disabled?: boolean;
   fullWidth?: boolean;
   className?: string;
   "aria-label"?: string;
@@ -47,6 +48,7 @@ export default function Button({
   external = false,
   type = "button",
   onClick,
+  disabled = false,
   fullWidth = false,
   className,
   "aria-label": ariaLabel,
@@ -85,7 +87,13 @@ export default function Button({
   }
 
   return (
-    <button type={type} className={classes} aria-label={ariaLabel} onClick={onClick}>
+    <button
+      type={type}
+      className={classes}
+      aria-label={ariaLabel}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </button>
   );

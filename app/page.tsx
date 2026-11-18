@@ -5,7 +5,7 @@ import About from "@/components/organisms/About";
 import Services from "@/components/organisms/Services";
 import Process from "@/components/organisms/Process";
 import Projects from "@/components/organisms/Projects";
-import Contact from "@/components/organisms/Contact";
+import Contact from "@/components/organisms/contact/Contact";
 
 const SITE_URL = "https://milanivancak.sk"; // TODO: replace with the real domain once known
 
